@@ -73,4 +73,4 @@ class TextBox:
             self.text_box = Surface()
 
         self.rect = self.text_box.get_rect()
-        self.rect.x, self.rect.y = x - self.rect.width() / 2, y
+        self.rect.x, self.rect.y = x - self.rect.width / 2, y
