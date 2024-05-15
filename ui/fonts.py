@@ -28,4 +28,5 @@ from pygame.font import SysFont
 class GameFont(Enum):
     """Store pygame Font instances used throughout the game."""
 
-    TIMES_NEW_ROMAN_12PT = SysFont("Times New Roman", 12)
+    # TIMES_NEW_ROMAN_12PT = SysFont("Times New Roman", 12)
+    pass

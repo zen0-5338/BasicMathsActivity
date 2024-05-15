@@ -39,7 +39,7 @@ class GameButton:
         label: str,
         x: SupportsFloat,
         y: SupportsFloat,
-        font: Optional[Font | GameFont] = GameFont.TIMES_NEW_ROMAN_12PT,
+        font: Optional[Font | GameFont] = None,
         color: Optional[Color | str | int] = None,
         background_color: Optional[Color | str | int] = None,
         **kwargs,
