@@ -84,29 +84,29 @@ class BasicMathsActivity(Activity):
     def build_ui(self) -> None:
         """Function for initial creation of UI"""
 
-        self.toolbar_box = ToolbarBox()
+        toolbar_box = ToolbarBox()
 
         # Activity Button
-        self.activity_button = ActivityToolbarButton(self)
-        self.toolbar_box.toolbar.insert(self.activity_button, 0)
-        self.activity_button.show()
+        activity_button = ActivityToolbarButton(self)
+        toolbar_box.toolbar.insert(activity_button, 0)
+        activity_button.show()
 
         # Separator between buttons
         separator = Gtk.SeparatorToolItem()
         separator.props.draw = False
         separator.set_expand(True)
-        self.toolbar_box.toolbar.insert(separator, -1)
+        toolbar_box.toolbar.insert(separator, -1)
         separator.show()
 
         # Stop Button
-        self.stop_button = StopButton(self)
-        self.toolbar_box.toolbar.insert(self.stop_button, -1)
-        self.stop_button.connect("clicked", self.stop)
-        self.stop_button.show()
+        stop_button = StopButton(self)
+        toolbar_box.toolbar.insert(self.stop_button, -1)
+        stop_button.connect("clicked", self.stop)
+        stop_button.show()
 
         # Show toolbar
-        self.set_toolbar_box(self.toolbar_box)
-        self.toolbar_box.show()
+        self.set_toolbar_box(toolbar_box)
+        toolbar_box.show()
 
     def stop(self, button: StopButton) -> None:
         """Stop the running activity instance. Also stops all child processes
