@@ -24,15 +24,8 @@ from enum import Enum
 
 from pygame.font import SysFont
 
-from scale_coordinates import scale_coordinates
-
 
 class GameFont(Enum):
-    """Store pygame Font instances used throughout the game.
-    Has scaled and unscaled variants. 
-    """
+    """Store pygame Font instances used throughout the game."""
 
     TIMES_NEW_ROMAN_12PT = SysFont("Times New Roman", 12)
-    TIMES_NEW_ROMAN_12PT_SCALED = SysFont(
-        "Times New Roman", scale_coordinates(12, 0)[0]
-    )

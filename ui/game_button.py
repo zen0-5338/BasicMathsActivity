@@ -28,7 +28,6 @@ from pygame.color import Color
 
 
 from fonts import GameFont
-from scale_coordinates import scale_coordinates
 from utils import logger
 
 
@@ -40,8 +39,7 @@ class GameButton:
         label: str,
         x: SupportsFloat,
         y: SupportsFloat,
-        scale_button: Optional[bool] = True,
-        font: Optional[Font | GameFont] = GameFont.TIMES_NEW_ROMAN_12PT_SCALED,
+        font: Optional[Font | GameFont] = GameFont.TIMES_NEW_ROMAN_12PT,
         color: Optional[Color | str | int] = None,
         background_color: Optional[Color | str | int] = None,
         **kwargs,
@@ -53,16 +51,10 @@ class GameButton:
             x (SupportsFloat): X coordinate of button.
             y (SupportsFloat): Y coordinate of button.
             font (Optional[Font]): Font for rendering the text.
-            scale_button (Optional[bool]): Whether to scale the button\
-                according to screen. Defaults to True.
         """
 
         self.label = label
-        self.font = font or (
-            GameFont.TIMES_NEW_ROMAN_12PT_SCALED
-            if scale_button
-            else GameFont.TIMES_NEW_ROMAN_12PT
-        )
+        self.font = font or GameFont.TIMES_NEW_ROMAN_12PT
         self.color = color
         self.background_color = background_color
 
@@ -79,7 +71,7 @@ class GameButton:
             self.button = Surface()
 
         self.rect = self.button.get_rect()
-        self.rect.x, self.rect.y = scale_coordinates(x, y) if scale_button else (x, y)
+        self.rect.x, self.rect.y = x, y
 
         self.hovered = False
 

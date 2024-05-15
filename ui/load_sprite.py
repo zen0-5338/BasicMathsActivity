@@ -26,7 +26,6 @@ from os import PathLike
 from pygame import error, image, Surface, transform
 
 from utils import logger
-from ui import scale_coordinates
 
 
 def load_sprite(
@@ -45,10 +44,10 @@ def load_sprite(
             Defaults to False.
         scale_sprite (Optional[bool]): Scale the sprite to fit in the world.\
             Defaults to true.
-        scale_x (Optional[SupportsFloat]): X scaling factor, auto-calculated.\
-            Defaults to None.
-        scale_y (Optional[SupportsFloat]): Y scaling factor, auto-calculated.\
-            Defaults to None.
+        scale_x (Optional[SupportsFloat]): X scaling factor.\
+            Defaults to 1.0.
+        scale_y (Optional[SupportsFloat]): Y scaling factor.\
+            Defaults to 1.0.
 
     Returns:
         Surface: Surface instance of the loaded sprite
@@ -56,9 +55,11 @@ def load_sprite(
 
     try:
         sprite = image.load(sprite_path)
-        sx, sy = sprite.get_rect().size
         if scale_sprite:
-            sprite = transform.scale(sprite, scale_coordinates(sx, sy, scale_x, scale_y))
+            sx, sy = sprite.get_rect().size
+            scale_x = scale_x or 1.0
+            scale_y = scale_y or 1.0
+            sprite = transform.scale(sprite, (int(sx * scale_x), int(sy * scale_y)))
 
     except error as sprite_loading_exception:
         logger.warning(
@@ -68,4 +69,4 @@ def load_sprite(
         sprite = Surface()
 
     sprite = sprite.convert()
-    return image.load(sprite_path)
+    return sprite

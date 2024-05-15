@@ -28,7 +28,6 @@ from pygame.color import Color
 
 
 from fonts import GameFont
-from scale_coordinates import scale_coordinates
 from utils import logger
 
 
@@ -40,8 +39,7 @@ class TextBox:
         label: str,
         x: SupportsFloat,
         y: SupportsFloat,
-        scale_button: Optional[bool] = True,
-        font: Optional[Font | GameFont] = GameFont.TIMES_NEW_ROMAN_12PT_SCALED,
+        font: Optional[Font | GameFont] = GameFont.TIMES_NEW_ROMAN_12PT,
         color: Optional[Color | str | int] = None,
         background_color: Optional[Color | str | int] = None,
         **kwargs,
@@ -58,11 +56,7 @@ class TextBox:
         """
 
         self.label = label
-        self.font = font or (
-            GameFont.TIMES_NEW_ROMAN_12PT_SCALED
-            if scale_button
-            else GameFont.TIMES_NEW_ROMAN_12PT
-        )
+        self.font = font
         self.color = color
         self.background_color = background_color
 
@@ -79,8 +73,4 @@ class TextBox:
             self.text_box = Surface()
 
         self.rect = self.text_box.get_rect()
-        self.rect.x, self.rect.y = (
-            scale_coordinates(x - self.rect.width() / 2, y)
-            if scale_button
-            else (x - self.rect.width() / 2, y)
-        )
+        self.rect.x, self.rect.y = x - self.rect.width() / 2, y

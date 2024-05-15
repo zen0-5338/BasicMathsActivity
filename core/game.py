@@ -23,6 +23,7 @@
 from gettext import gettext
 import random
 import time
+from typing import Optional, SupportsFloat, Tuple
 
 import pygame
 import gi
@@ -40,6 +41,9 @@ from ui.fonts import GameFont
 class Game:
     """Game class for Mathematics activity"""
 
+    SCREEN_WIDTH = 640
+    SCREEN_HEIGHT = 480
+
     def __init__(self, parent_activity: Activity) -> None:
         """Create the game instance to play
 
@@ -51,6 +55,29 @@ class Game:
         self.username = ""
         self.keys = (pygame.K_RETURN, pygame.K_ESCAPE)
 
+    def _scale_coordinates(
+        self,
+        x: SupportsFloat,
+        y: SupportsFloat,
+        custom_scale_x: Optional[SupportsFloat] = None,
+        custom_scale_y: Optional[SupportsFloat] = None,
+    ) -> Tuple[int, int]:
+        """Return coordinates scaled to world
+
+        Args:
+            x (SupportsFloat): X coordinate of point.
+            y (SupportsFloat): Y coordinate of point
+            custom_scale_x (Optional[SupportsFloat]): Custom X scale factor. Auto calculated by default.
+            custom_scale_y (Optional[SupportsFloat]): Custom Y scale factor. Auto calculated by default.
+
+        Returns:
+            Tuple[int, int]: Returns the coordinates as tuple(x, y)
+        """
+
+        custom_scale_x = custom_scale_x or self.scale_x
+        custom_scale_y = custom_scale_y or self.scale_x
+        return (int(x * custom_scale_x), int(y * custom_scale_y))
+
     def run(self) -> None:
         """Run the game instance"""
 
@@ -61,18 +88,36 @@ class Game:
                 (pygame.display.Info().current_w, pygame.display.Info().current_h)
             )
 
-        self.background = load_sprite(GAME_BACKGROUND_PATH)
+        self.scale_x = self.screen.get_width() / self.SCREEN_WIDTH
+        self.scale_y = self.screen.get_height() / self.SCREEN_HEIGHT
+
+        self.background = load_sprite(
+            GAME_BACKGROUND_PATH,
+            scale_x=self.scale_x,
+            scale_y=self.scale_y,
+        )
         self.screen.blit(self.background, (0, 0))
 
-        self.font = GameFont.TIMES_NEW_ROMAN_12PT_SCALED
+        self.font = pygame.font.Font(
+            "./fonts/Roboto.ttf", self._scale_coordinates(12, 0)[0]
+        )
         self.running = True
         self.main_menu()
 
     def main_menu(self) -> None:
-        self.play_button = GameButton(gettext("Play"), 475, 180)
-        self.quit_button = GameButton(gettext("Quit"), 475, 360)
+        self.play_button = GameButton(
+            gettext("Play"), *self._scale_coordinates(475, 180), font=self.font
+        )
+        self.quit_button = GameButton(
+            gettext("Quit"), *self._scale_coordinates(475, 360), font=self.font
+        )
         self.buttons = [self.play_button, self.quit_button]
-        self.title = TextBox(gettext("Select the correct shape"))
+
+        self.title = TextBox(
+            gettext("Select the correct shape"),
+            *self._scale_coordinates(475, 540),
+            font=self.font
+        )
 
         self.screen.blit(self.play_button, self.play_button.rect)
         self.screen.blit(self.quit_button, self.quit_button.rect)
