@@ -22,16 +22,16 @@
 
 from typing import Optional, SupportsFloat
 
-from pygame import error, Surface, mouse
+from pygame import error, Surface
 from pygame.font import Font
 from pygame.color import Color
 
 
-from .fonts import GameFont
-from ..utils import logger
+from core.ui.fonts import GameFont
+from core.utils import logger
 
 
-class GameButton:
+class TextBox:
     """Class for creating game buttons"""
 
     def __init__(
@@ -44,56 +44,33 @@ class GameButton:
         background_color: Optional[Color | str | int] = None,
         **kwargs,
     ) -> None:
-        """Instantiate a button
+        """Instantiate a Text Box
 
         Args:
             label (str): Label text.
-            x (SupportsFloat): X coordinate of button.
-            y (SupportsFloat): Y coordinate of button.
+            x (SupportsFloat): X coordinate of text_box.
+            y (SupportsFloat): Y coordinate of text_box.
             font (Optional[Font]): Font for rendering the text.
+            scale_button (Optional[bool]): Whether to scale the text_box\
+                according to screen. Defaults to True.
         """
 
         self.label = label
-        self.font = font or GameFont.TIMES_NEW_ROMAN_12PT
+        self.font = font
         self.color = color
         self.background_color = background_color
 
-        # Render Button
+        # Render Text Box
         try:
-            self.button = self.font.render(
+            self.text_box = self.font.render(
                 label,
                 True,
-                ((0, 0, 255) or self.color),
+                ((0, 0, 0) or self.color),
                 self.background_color,
             )
         except error as button_rendering_error:
-            logger.error(f"Failed to render button for {label}. ", exc_info=True)
-            self.button = Surface()
+            logger.error(f"Failed to render textbox for {label}. ", exc_info=True)
+            self.text_box = Surface()
 
-        self.rect = self.button.get_rect()
-        self.rect.x, self.rect.y = x, y
-
-        self.hovered = False
-
-    def check_mouse_hover(self) -> bool:
-        """Checks whether mouse is hovering over button\
-        and updates its hover state accordingly"""
-        if self.rect.collidepoint(mouse.get_pos()):
-            if not self.hovered:
-                self.hovered = True
-                self.button = self.font.render(
-                    self.label,
-                    True,
-                    (122, 245, 61),
-                    (102, 110, 98),
-                )
-                return True
-        else:
-            self.hovered = False
-            self.object = self.font.render(
-                self.label,
-                True,
-                ((0, 0, 255) or self.color),
-                self.background_color,
-            )
-            return False
+        self.rect = self.text_box.get_rect()
+        self.rect.x, self.rect.y = x - self.rect.width() / 2, y

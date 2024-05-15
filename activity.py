@@ -28,7 +28,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 from gettext import gettext
-from utils import logger
+from core.utils import logger
 
 import pygame
 from sugar3.activity.activity import Activity

@@ -33,9 +33,9 @@ gi.require_version("Gtk", "3.0")
 
 from sugar3.activity.activity import Activity, get_activity_root
 
-from utils import logger
-from ui import GameButton, GAME_BACKGROUND_PATH, load_sprite, TextBox
-from ui.fonts import GameFont
+from core.utils import logger
+from core.ui import GameButton, GAME_BACKGROUND_PATH, load_sprite, TextBox
+from core.ui.fonts import GameFont
 
 
 class Game:
