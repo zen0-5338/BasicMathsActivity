@@ -27,8 +27,8 @@ from pygame.font import Font
 from pygame.color import Color
 
 
-from fonts import GameFont
-from utils import logger
+from .fonts import GameFont
+from ..utils import logger
 
 
 class GameButton:

@@ -25,7 +25,7 @@ from os import PathLike
 
 from pygame import error, image, Surface, transform
 
-from utils import logger
+from ..utils import logger
 
 
 def load_sprite(
