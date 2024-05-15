@@ -100,7 +100,7 @@ class BasicMathsActivity(Activity):
 
         # Stop Button
         stop_button = StopButton(self)
-        toolbar_box.toolbar.insert(self.stop_button, -1)
+        toolbar_box.toolbar.insert(stop_button, -1)
         stop_button.connect("clicked", self.stop)
         stop_button.show()
 

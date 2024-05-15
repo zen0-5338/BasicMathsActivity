@@ -2,7 +2,7 @@
 name = BasicMaths
 activity_version = 1
 bundle_id = org.genx.BasicMaths
-exec = sugar-activity3 activity.BasicMaths
+exec = sugar-activity3 activity.BasicMathsActivity
 icon = BasicMaths
 show_launcher = yes
 license = MIT
