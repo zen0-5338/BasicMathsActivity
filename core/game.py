@@ -49,7 +49,7 @@ class Game:
 
         self.parent_activity = parent_activity
         self.username = ""
-        self.keys = tuple()
+        self.keys = (pygame.K_RETURN, pygame.K_ESCAPE)
 
     def run(self) -> None:
         """Run the game instance"""
