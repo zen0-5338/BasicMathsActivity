@@ -1,0 +1,38 @@
+# MIT License
+#
+# Copyright (c) 2024 zen0-5338
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, 8and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+from enum import Enum
+
+from pygame.font import SysFont
+
+from scale_coordinates import scale_coordinates
+
+
+class GameFont(Enum):
+    """Store pygame Font instances used throughout the game.
+    Has scaled and unscaled variants. 
+    """
+
+    TIMES_NEW_ROMAN_12PT = SysFont("Times New Roman", 12)
+    TIMES_NEW_ROMAN_12PT_SCALED = SysFont(
+        "Times New Roman", scale_coordinates(12, 0)[0]
+    )
