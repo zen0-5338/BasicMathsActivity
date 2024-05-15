@@ -65,7 +65,7 @@ class BasicMathsActivity(Activity):
 
         # Initialise game
         try:
-            self.game_instance = Game(activity=self)
+            self.game_instance = Game(self)
         except Exception as game_instantiation_exception:
             logger.critical("Failed to instantiate Game class", exc_info=True)
 
@@ -84,10 +84,7 @@ class BasicMathsActivity(Activity):
     def build_ui(self) -> None:
         """Function for initial creation of UI"""
 
-        self.toolbarbox = ToolbarBox()
-
-        # toolbar with the new toolbar redesign
-        toolbar_box = ToolbarBox()
+        self.toolbar_box = ToolbarBox()
 
         # Activity Button
         self.activity_button = ActivityToolbarButton(self)
@@ -98,7 +95,7 @@ class BasicMathsActivity(Activity):
         separator = Gtk.SeparatorToolItem()
         separator.props.draw = False
         separator.set_expand(True)
-        toolbar_box.toolbar.insert(separator, -1)
+        self.toolbar_box.toolbar.insert(separator, -1)
         separator.show()
 
         # Stop Button
@@ -108,7 +105,7 @@ class BasicMathsActivity(Activity):
         self.stop_button.show()
 
         # Show toolbar
-        self.set_toolbar_box(toolbar_box)
+        self.set_toolbar_box(self.toolbar_box)
         self.toolbar_box.show()
 
     def stop(self, button: StopButton) -> None:
