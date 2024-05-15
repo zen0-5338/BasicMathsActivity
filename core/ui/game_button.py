@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from typing import Optional, SupportsFloat
+from typing import Optional, SupportsFloat, Union
 
 from pygame import error, Surface, mouse
 from pygame.font import Font
@@ -39,9 +39,9 @@ class GameButton:
         label: str,
         x: SupportsFloat,
         y: SupportsFloat,
-        font: Optional[Font | GameFont] = None,
-        color: Optional[Color | str | int] = None,
-        background_color: Optional[Color | str | int] = None,
+        font: Optional[Union[Font, GameFont]] = None,
+        color: Optional[Union[Color, str, int]] = None,
+        background_color: Optional[Union[Color, str, int]] = None,
         **kwargs,
     ) -> None:
         """Instantiate a button
