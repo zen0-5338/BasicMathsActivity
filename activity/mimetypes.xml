@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/maths-activity">
+         <comment xml:lang="en">Basic Maths Activity</comment>
+         <glob pattern="*.maths"/>
+  </mime-type>
+</mime-info>

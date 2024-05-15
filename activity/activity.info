@@ -1,0 +1,9 @@
+[Activity]
+name = BasicMaths
+activity_version = 1
+bundle_id = org.genx.BasicMaths
+exec = sugar-activity3 activity.BasicMaths
+icon = BasicMaths
+show_launcher = yes
+license = MIT
+repository = https://github.com/zen0-5338/BasicMathsActivity.git
